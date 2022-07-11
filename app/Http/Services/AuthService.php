@@ -1,6 +1,6 @@
-<?
+<?php
 
-namespace App\Services;
+namespace App\Http\Services;
 
 use App\Mail\WelcomeMail;
 use App\Models\User;
@@ -55,18 +55,5 @@ class AuthService
     public function generateJWToken(User $user)
     {
         return Auth::login($user);
-    }
-
-    public function isADomainMail($email, $domain = 'zora.ng')
-    {
-        $pos = strpos($email, $domain, strlen($email) - strlen($domain));
-
-        if ($pos === false)
-            return false;
-
-        if ($pos == 0 || $email[(int) $pos - 1] == "@" || $email[(int) $pos - 1] == ".")
-            return true;
-
-        return false;
     }
 }

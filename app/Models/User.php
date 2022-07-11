@@ -10,8 +10,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\NewAccessToken;
 use Illuminate\Support\Str;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -62,7 +63,7 @@ class User extends Authenticatable
 
     public const AllowedSorts = ['id', 'name', 'email'];
 
-    public const AllowedIncludes = ['roles', 'permissions'];
+    public const AllowedIncludes = [];
 
     public const AllowedFilters = ['id', 'name', 'email'];
 

@@ -23,7 +23,7 @@ class WelcomeMail extends Mailable
     {
         $this->name = $name;
         $this->otp = $otp;
-        $this->subject('Welcome to Zora, ' . $name);
+        $this->subject('Welcome to Substribe, ' . $name);
     }
 
     /**

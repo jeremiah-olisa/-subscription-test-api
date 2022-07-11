@@ -1,6 +1,6 @@
-<?
+<?php
 
-namespace App\Services;
+namespace App\Http\Services;
 
 use Illuminate\Contracts\Mail\Mailable;
 use Illuminate\Support\Facades\Mail;

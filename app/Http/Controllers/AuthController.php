@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\DefaultRole;
 use App\Models\User;
 use App\Repositories\UserRepository;
-use App\Services\AuthService;
+use App\Http\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,13 +17,14 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    private AuthService $authService;
-    private UserRepository $userRepository;
+    public AuthService $authService;
+    public UserRepository $userRepository;
 
     public function __construct()
     {
-        $this->authService = new AuthService();
-        $this->userRepository = new UserRepository();
+        // parent::__construct();
+        $this->authService = new AuthService;
+        $this->userRepository = new UserRepository;
         $this->middleware('auth:api', ['except' => ['login', 'register', 'verifyMail', 'forgotPassword', 'resetPassword']]);
     }
 
@@ -105,7 +105,7 @@ class AuthController extends Controller
     {
         $request->validate($this->userRepository::CreateValidation);
 
-        $fields = $request->only('name', 'email', 'phone_number', 'password', 'current_password');
+        $fields = $request->only('name', 'email', 'password', 'current_password');
 
         $user = $this->userRepository->__update($this->user(), $fields);
 

@@ -1,5 +1,5 @@
 @component('mail::message')
-# Welcome To Zora, {{$name}}
+# Welcome To Substribe, {{$name}}
 
 {{$otp}}
 
