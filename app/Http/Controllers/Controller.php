@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Controller extends BaseController
 {
@@ -25,6 +26,15 @@ class Controller extends BaseController
     }
 
 
+    function exists($class, string $column, $value, string $err = 'Record was not found', bool $throw_error = true)
+    {
+        $count = $class::where($column, $value)->count();
+        
+        if ($throw_error && $count < 1) throw new HttpException(404, $err);
+        
+        return $count;
+    }
+    
     public function response(string $message, int $statusCode, $data = null, ?array $meta  = [], ?bool $paginated = false)
     {
 

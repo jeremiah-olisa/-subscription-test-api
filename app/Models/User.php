@@ -111,6 +111,12 @@ class User extends Authenticatable implements JWTSubject
         return $token;
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
     function verifyMail($otp)
     {
         $verify = $this->verifyOtp($otp);
