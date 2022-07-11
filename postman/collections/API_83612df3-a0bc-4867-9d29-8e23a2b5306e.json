@@ -1,0 +1,972 @@
+{
+	"info": {
+		"_postman_id": "36afe35e-27ce-4342-9fd4-89d7deb38868",
+		"name": "API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"id": "3d78ee17-a440-4222-8b4a-b60a3fee2745",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"jeremiah.olisa@mail.com\",\r\n    \"password\": \"Pa$$w0rd!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"id": "1d038a8f-3abb-44b5-8f13-3f04bafd8d9d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jeremiah Olisa\",\r\n    \"email\": \"jeremiah.olisa@mail.com\",\r\n    \"password\": \"Pa$$w0rd!\",\r\n    \"password_confirmation\": \"Pa$$w0rd!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh token",
+					"id": "3d490662-35f5-413a-80c8-29ef5f5f8d9e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/auth/refresh",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset password",
+					"id": "4753f295-9986-406d-9e75-c060d7a572cd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"jeremiaholisa@zora.ng\",\r\n    \"otp\": 840156,\r\n    \"password\": \"Pa$$w0rd!!\",\r\n    \"password_confirmation\": \"Pa$$w0rd!!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/reset-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot password",
+					"id": "0822970b-afe6-4ba2-ab5b-de9918cb9d62",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"jeremiaholisa@zora.ng\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/forgot-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get current user profile",
+					"id": "6fa60526-8dfd-4024-b643-f7e510688f99",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"jeremiaholisa453@gmail.com\",\r\n    \"password\": \"Pa$$w0rd!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user profile",
+					"id": "0ce90f3f-f375-4417-b212-32dbcad94980",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jeremiah Olisa\",\r\n    \"email\": \"jeremiah@mail.com\",\r\n    \"current_password\": \"Pa$$w0rd!!\",\r\n    \"password\": \"Pa$$w0rd!\",\r\n    \"password_confirmation\": \"Pa$$w0rd!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						},
+						"description": "All fields in this payload are option on pass in the field u want to update"
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"id": "b4a339a0-dbfa-40dd-abff-5ffc15217353",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"jeremiaholisa453@gmail.com\",\r\n    \"password\": \"Pa$$w0rd!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send verification mail",
+					"id": "cb48dc8c-11af-476a-9b2c-7e65f4bcb30a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"jeremiah.olisa@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/send-verification-mail",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"send-verification-mail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify mail",
+					"id": "655c1cdd-d91b-4e6d-b7f2-0bf04c5c596d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"jeremiah.olisa@mail.com\",\r\n    \"otp\": 867169\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/verify-mail",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"verify-mail"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "f265169d-e56f-4dea-977b-6a6c880cf62c"
+		},
+		{
+			"name": "websites",
+			"item": [
+				{
+					"name": "create website",
+					"id": "1df6246e-51f2-4741-805f-52ae98f6720d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test Website\",\r\n    \"url\": \"https://codefactory.com.ng/\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/websites",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"websites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get websites",
+					"id": "a58479f2-2cc5-4831-b687-1acb4a965f4b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/websites",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"websites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get website by id",
+					"id": "116c269a-19c4-4b37-929c-417b7cd31cad",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/websites/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"websites",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update website",
+					"id": "5eefceb0-3622-44ae-b262-5cb1b0248116",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test Website Updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/websites/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"websites",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete website",
+					"id": "7512eb69-68cd-4caf-8ca0-14d7056cf192",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/websites/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"websites",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "c7db4a12-f873-4b25-80af-50fa51f9d29f"
+		},
+		{
+			"name": "posts",
+			"item": [
+				{
+					"name": "create post",
+					"id": "b78ffb63-4a73-4220-b09f-9732e371dd83",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Test Post title\",\r\n    \"description\": \"lorem blah blah blah!!\",\r\n    \"content\": \"an arrangement to receive something, typically a publication, regularly by paying in advance. make sure you get a copy every month by taking out a subscription\",\r\n    \"website_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/posts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get posts",
+					"id": "61994ec0-5108-456c-b216-24a04926109a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/posts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get post by id",
+					"id": "335a5563-8556-4344-8b4f-4c4245f20161",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/posts/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update post",
+					"id": "502d2593-d91a-440d-8beb-c22d71710c92",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Test Post title updated\",\r\n    \"description\": \"lorem blah blah blah!!\",\r\n    \"content\": \"an arrangement to receive something, typically a publication, regularly by paying in advance. make sure you get a copy every month by taking out a subscription\",\r\n    \"website_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/posts/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete post",
+					"id": "129f306d-0b00-4801-b654-a5377c164cec",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/posts/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "4288264e-0384-44fb-8893-9acef2ec78b7"
+		},
+		{
+			"name": "subscriptions",
+			"item": [
+				{
+					"name": "create subscription",
+					"id": "27c4ba24-de82-4503-b95e-a8befb6d6100",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"website_id\": 1,\r\n    \"user_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/subscriptions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get subscriptions",
+					"id": "c7c377e1-d693-4069-a53f-fa26a3496fe1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/subscriptions?include=user,website&per_page=1&page=1&select=user_id,website_id&sort=-id&filter[user_id]=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subscriptions"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "user,website",
+									"description": "include the relation ship"
+								},
+								{
+									"key": "per_page",
+									"value": "1",
+									"description": "result per page"
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"description": "what page do you want"
+								},
+								{
+									"key": "select",
+									"value": "user_id,website_id",
+									"description": "fields you want sect"
+								},
+								{
+									"key": "sort",
+									"value": "-id",
+									"description": "sort by id desc "
+								},
+								{
+									"key": "filter[user_id]",
+									"value": "1",
+									"description": "filter by user id (get that user subscriptions)"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get subscription by id",
+					"id": "7c7c2de5-b8e6-4022-aeaf-73969e911d46",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/subscriptions/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subscriptions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update subscription",
+					"id": "cb793c55-e1f5-42b2-9c3c-14b93ac5a295",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"website_id\": 1,\r\n    \"user_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/subscriptions/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subscriptions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete subscription",
+					"id": "58e34947-e471-40db-bc3b-5dc3ecde1339",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/subscriptions/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"subscriptions",
+								"3"
+							]
+						},
+						"description": "| Query Param | **Value** | **Description** |\n| --- | --- | --- |\n| include | relationships: user,website | includes the relation ship |\n| per_page | 1 | result per page |\n| page | 1 | current page |\n| select | fields:name,website_is | fields you want select or display |\n| filter\\[field_to_be_filtered\\] | test |  |\n| sort | \\-id | sort by id desc |\n\nStartFragment"
+					},
+					"response": []
+				}
+			],
+			"id": "520b753d-d9f8-4042-899a-d10a58665a04"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "cbd9416b-fba0-44ca-8024-1e2e318154a1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "c559f661-ccf3-4dd4-bc89-5ac1ebd5223d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "783753b2-e95f-4942-9b0f-8ca48a60cde6",
+			"key": "baseUrl",
+			"value": "localhost:8000",
+			"type": "string"
+		}
+	]
+}
