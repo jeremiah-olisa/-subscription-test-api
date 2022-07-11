@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SubscriberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +41,8 @@ Route::prefix($app_version)->group(function () {
     Route::middleware('auth:api')->group(function () {
         Route::apiResources([
             'websites' => WebsiteController::class,
+            'posts' => PostController::class,
+            'subscribers' => SubscriberController::class,
         ]);
     });
 });
