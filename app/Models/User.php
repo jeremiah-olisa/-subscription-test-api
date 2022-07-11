@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Sanctum\NewAccessToken;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -41,4 +44,75 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public const AllQueryFields = ['id', 'name', 'email'];
+
+    public const DefaultSorts = ['id', 'name', 'email'];
+
+    public const AllowedSorts = ['id', 'name', 'email'];
+
+    public const AllowedIncludes = ['roles', 'permissions'];
+
+    public const AllowedFilters = ['id', 'name', 'email'];
+
+    public function getJWTCustomClaims()
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+
+    {
+        return [];
+    }
+
+    public function createOtpToken(string $name, array $abilities = ['*'])
+    {
+        $otp = rand(100000, 999999);
+        $name = Str::slug($name, '-');
+
+        $token = $this->tokens()->create([
+            'name' => $name,
+            'token' => hash('sha256', $plainTextToken = $otp),
+            'abilities' => $abilities,
+        ]);
+
+        return new NewAccessToken($token, $plainTextToken);
+    }
+
+    public function verifyOtp($otp)
+    {
+        $token = $this->tokens()->where('token', hash('sha256', $otp))->where('tokenable_id', $this->id)->first();
+
+        if ($token != null) {
+            $datetime1 = new DateTime();
+            $datetime2 = new DateTime($token->created_at);
+            $has_expired = intval($datetime1->diff($datetime2)->format('%i') ?? 0)
+                > intval(env('APP_OTP_EXPIRATION_TIME', "10"));
+
+            $token->delete();
+
+            if ($has_expired) return null;
+        }
+
+        return $token;
+    }
+
+    function verifyMail($otp)
+    {
+        $verify = $this->verifyOtp($otp);
+        return ($verify != null) ? $this->markEmailAsVerified() : false;
+    }
 }
