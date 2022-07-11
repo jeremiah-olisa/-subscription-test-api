@@ -88,19 +88,23 @@ class PostController extends Controller
         $this->exists($this->model, 'id', $id, 'Post was not found');
 
         $request->validate([
+            'title' => 'string|min:3|max:50',
+            'description' => 'string|min:20|max:200',
+            'content' => 'string|min:20',
             'website_id' => 'numeric|exists:websites,id',
-            'user_id' => 'numeric|exists:users,id'
         ]);
 
-        $fields = $request->only('website_id', 'user_id');
+        $fields = $request->only('website_id', 'title', 'content', 'description');
 
-        $subscriber = $this->model->firstWhere('id', $id);
-        $subscriber->website_id = $fields['website_id'] ?? $subscriber->website_id;
-        $subscriber->user_id = $fields['user_id'] ?? $subscriber->user_id;
+        $post = $this->model->firstWhere('id', $id);
+        $post->website_id = $fields['website_id'] ?? $post->website_id;
+        $post->title = $fields['title'] ?? $post->title;
+        $post->content = $fields['content'] ?? $post->content;
+        $post->description = $fields['description'] ?? $post->description;
 
-        $subscriber->save();
+        $post->save();
 
-        return $this->response('Posts updated successfully', 200, $subscriber);
+        return $this->response('Posts updated successfully', 200, $post);
     }
 
     /**

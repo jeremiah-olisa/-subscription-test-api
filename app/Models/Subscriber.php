@@ -26,11 +26,11 @@ class Subscriber extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     public function website()
     {
-        return $this->hasOne(Website::class);
+        return $this->hasOne(Website::class, 'id', 'website_id');
     }
 }

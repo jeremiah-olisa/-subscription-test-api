@@ -42,7 +42,7 @@ Route::prefix($app_version)->group(function () {
         Route::apiResources([
             'websites' => WebsiteController::class,
             'posts' => PostController::class,
-            'subscribers' => SubscriberController::class,
+            'subscriptions' => SubscriberController::class,
         ]);
     });
 });
