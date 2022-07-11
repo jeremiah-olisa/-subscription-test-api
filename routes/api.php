@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,9 +36,9 @@ Route::prefix($app_version)->group(function () {
         });
     });
 
-    Route::middleware('auth:api')->prefix('/admin/account/manage')->group(function () {
+    Route::middleware('auth:api')->group(function () {
         Route::apiResources([
-            'users' => UserManagerController::class,
+            'websites' => WebsiteController::class,
         ]);
     });
 });
