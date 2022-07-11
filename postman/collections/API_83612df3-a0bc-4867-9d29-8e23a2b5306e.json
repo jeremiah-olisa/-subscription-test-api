@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "36afe35e-27ce-4342-9fd4-89d7deb38868",
 		"name": "API",
+		"description": "All the fields in the update endpoints are optional",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -927,6 +928,105 @@
 				}
 			],
 			"id": "520b753d-d9f8-4042-899a-d10a58665a04"
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "get users",
+					"id": "23106ad6-c4c2-4c89-b942-bd98ed38d17e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users?include=websites,subscriptions,posts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "websites,subscriptions,posts"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"id": "9e85d767-0ca5-4437-a5c3-aad9e4b64e34",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"id": "cc40b733-79d1-40cf-9c67-77d396c664b8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/posts/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "8b437e3a-b7fb-4488-ae3e-ec3e99b848fb"
 		}
 	],
 	"auth": {
@@ -963,7 +1063,7 @@
 	],
 	"variable": [
 		{
-			"id": "783753b2-e95f-4942-9b0f-8ca48a60cde6",
+			"id": "02460a22-11a7-4d9f-a257-831fd27b8082",
 			"key": "baseUrl",
 			"value": "localhost:8000",
 			"type": "string"
