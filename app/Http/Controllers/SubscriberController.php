@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewSubscriberEvent;
 use App\Models\Subscriber;
 use App\Repositories\CustomQueryBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class SubscriberController extends Controller
 {
@@ -49,10 +51,17 @@ class SubscriberController extends Controller
         ]);
 
         $fields = $request->only('website_id', 'user_id');
-
-        $website = $this->model->create($fields);
-
-        return $this->response('Websites created successfully', 201, $website);
+        
+        
+        $has_subscription = $this->model->where('website_id', $fields['website_id'])->where('user_id', $fields['user_id'])->count() > 0;
+        
+        if ($has_subscription == true) throw new HttpException(400, 'You have subscribed to this website before');
+        
+        $subscription = $this->model->create($fields);
+        
+        NewSubscriberEvent::dispatch($subscription);
+        
+        return $this->response('Websites created successfully', 201, $subscription);
     }
 
     /**
@@ -85,13 +94,15 @@ class SubscriberController extends Controller
     public function update(Request $request, $id)
     {
         $this->exists($this->model, 'id', $id, 'Subscriber was not found');
-
         $request->validate([
             'website_id' => 'numeric|exists:websites,id',
             'user_id' => 'numeric|exists:users,id'
         ]);
 
         $fields = $request->only('website_id', 'user_id');
+
+        $has_subscription = $this->model->where('website_id', $fields['website_id'])->where('user_id', $fields['user_id'])->count() > 0;
+        if ($has_subscription == true) throw new HttpException(400, 'You have subscribed to this website before');
 
         $subscriber = $this->model->firstWhere('id', $id);
         $subscriber->website_id = $fields['website_id'] ?? $subscriber->website_id;
