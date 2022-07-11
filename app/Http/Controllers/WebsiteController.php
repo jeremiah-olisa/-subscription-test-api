@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\Auth;
 class WebsiteController extends Controller
 {
     private Website $model;
+    private string|null|array $query;
 
     public function __construct()
     {
         $this->model = new Website();
+        $this->query = request()->query();
     }
 
     /**
@@ -25,10 +27,10 @@ class WebsiteController extends Controller
     {
         //
         $websites = CustomQueryBuilder::forModel($this->model::class, $this->model)
-            ->simplePaginate((request()->query())['per_page'] ?? 15);
+            ->simplePaginate($this->query['per_page'] ?? 15);
 
 
-        return $this->response('Websites retrived successfully', 200, $websites);
+        return $this->response('Websites retrived successfully', 200, $websites, [], true);
     }
 
     /**
@@ -44,7 +46,7 @@ class WebsiteController extends Controller
 
         $request->validate([
             'name' => 'string|required|min:5|max:25',
-            'url' => 'string|required|min:11',
+            'url' => 'string|required|min:5|max:50|url|unique:websites,url',
             'owner_id' => 'numeric|required|exists:users,id'
         ]);
 
@@ -63,12 +65,12 @@ class WebsiteController extends Controller
      */
     public function show($id)
     {
-        $this->exists(new Website(), 'id', $id, 'Website was not found');
+        $this->exists($this->model, 'id', $id, 'Website was not found');
 
-        $website = CustomQueryBuilder::forModel(Website::class, new Website)
+        $website = CustomQueryBuilder::forModel($this->model::class, $this->model)
             ->where('id', $id)
-            ->with($this->include_q)
-            ->select($this->select_q)
+            ->with($this->query['include_q'] ?? [])
+            ->select($this->query['select_q'] ?? '*')
             ->first();
 
 
@@ -84,11 +86,11 @@ class WebsiteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->exists(new Website(), 'id', $id, 'Website was not found');
+        $this->exists($this->model, 'id', $id, 'Website was not found');
 
         $request->validate([
             'name' => 'string|min:5|max:25',
-            'url' => 'string|min:11',
+            'url' => 'string|min:5|max:50|url|unique:websites,url',
             'owner_id' => 'numeric|exists:users,id'
         ]);
 
@@ -113,7 +115,7 @@ class WebsiteController extends Controller
      */
     public function destroy($id)
     {
-        $this->exists(new Website(), 'id', $id, 'Website was not found');
+        $this->exists($this->model, 'id', $id, 'Website was not found');
         $result = $this->model->firstWhere('id', $id)->delete();
 
         if ($result) return $this->response('Websites deleted successfully', 200, $result);
