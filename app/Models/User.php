@@ -63,7 +63,7 @@ class User extends Authenticatable implements JWTSubject
 
     public const AllowedSorts = ['id', 'name', 'email'];
 
-    public const AllowedIncludes = [];
+    public const AllowedIncludes = ['websites', 'posts', 'subscriptions'];
 
     public const AllowedFilters = ['id', 'name', 'email'];
 
@@ -123,16 +123,16 @@ class User extends Authenticatable implements JWTSubject
 
     public function websites()
     {
-        $this->hasMany(Website::class, 'owner_id', 'id');
+        return $this->hasMany(Website::class, 'owner_id', 'id');
     }
     
     public function subscriptions()
     {
-        $this->hasMany(Subscriber::class, 'user_id', 'id');
+        return $this->hasMany(Subscriber::class, 'user_id', 'id');
     }
     
     public function posts()
     {
-        $this->hasManyThrough(Post::class, Website::class, 'owner_id', 'website_id', 'id', 'id');
+        return $this->hasManyThrough(Post::class, Website::class, 'owner_id', 'website_id', 'id', 'id');
     }
 }
