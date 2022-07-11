@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SubscriberController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,10 @@ Route::prefix($app_version)->group(function () {
             'websites' => WebsiteController::class,
             'posts' => PostController::class,
             'subscriptions' => SubscriberController::class,
+        ]);
+        
+        Route::apiResource('users', UserController::class)->only([
+            'index', 'show', 'destroy'
         ]);
     });
 });

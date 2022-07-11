@@ -67,14 +67,12 @@ class User extends Authenticatable implements JWTSubject
 
     public const AllowedFilters = ['id', 'name', 'email'];
 
-    public function getJWTCustomClaims()
-
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *
      * @return array
      */
-
+    public function getJWTCustomClaims()
     {
         return [];
     }
@@ -121,5 +119,20 @@ class User extends Authenticatable implements JWTSubject
     {
         $verify = $this->verifyOtp($otp);
         return ($verify != null) ? $this->markEmailAsVerified() : false;
+    }
+
+    public function websites()
+    {
+        $this->hasMany(Website::class, 'owner_id', 'id');
+    }
+    
+    public function subscriptions()
+    {
+        $this->hasMany(Subscriber::class, 'user_id', 'id');
+    }
+    
+    public function posts()
+    {
+        $this->hasManyThrough(Post::class, Website::class, 'owner_id', 'website_id', 'id', 'id');
     }
 }
